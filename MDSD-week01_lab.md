@@ -676,6 +676,9 @@ Doctor summary (to see all details, run flutter doctor -v):
 > 📝 **บันทึกผล:** จดบันทึก Error (`[✗]`) ที่พบ และทำการแก้ไขตามคำแนะนำ  
 > ไม่ต้องแก้ไขรายการที่ขึ้น `[!] Android Studio`
 
+<img width="810" height="317" alt="image" src="https://github.com/user-attachments/assets/49e04ab3-4aaf-4788-ad5e-98071cfca92f" />
+
+
 ---
 
 ### ขั้นตอนที่ 5: ติดตั้ง VS Code และ Flutter Extension
