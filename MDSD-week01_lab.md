@@ -1775,35 +1775,92 @@ flutter run
 
 ### 3.1 ผลการติดตั้ง Flutter
 
-```
-flutter doctor output:
-┌─────────────────────────────────────────────────────────┐
-│                                                         │
-│  วางผลลัพธ์จาก flutter doctor ที่นี่                    │
-│                                                         │
-└─────────────────────────────────────────────────────────┘
 
-Flutter Version: ___________________
-Dart Version: ______________________
-Android SDK Version: _______________
+flutter doctor output:
+<img width="577" height="211" alt="image" src="https://github.com/user-attachments/assets/38bb48bb-55ea-4eb7-9702-76396942c1f6" />
+
+<img width="1213" height="725" alt="image" src="https://github.com/user-attachments/assets/83b8e4e6-4272-4af0-8899-587802d6c207" />
+
+```
+Flutter Version: 3.44.4
+Dart Version: 3.12.2
+Android SDK Version: 34.0.0
 ```
 
 ### 3.2 Screenshot ของ Flutter App
 
-```
-[แนบ Screenshot ของ Profile Card App ที่สร้าง]
-```
+<img width="957" height="1003" alt="image" src="https://github.com/user-attachments/assets/36231c90-de0b-4b72-8ff5-620ef10be8bb" />
 
 **Widget Tree ที่วาด:**
 
 ```
-(วาด Widget Tree ของแอปที่สร้างด้วยมือ)
-
-MaterialApp
-└── ?
-    └── ?
-        └── ...
+MyApp 
+  └── MaterialApp
+        └── ProfilePage
+              └── Scaffold
+                    ├── AppBar
+                    │     └── title
+                    │
+                    └── body: SingleChildScrollView
+                          └── Padding 
+                                └── Column
+                                      ├── SizedBox 
+                                      ├── CircleAvatar
+                                      │     └── Icon 
+                                      ├── SizedBox
+                                      ├── 'Nirapada Khattiya'
+                                      ├── SizedBox
+                                      ├── 'รหัสนักศึกษา: 67030118'
+                                      ├── SizedBox
+                                      │
+                                      ├── Card 
+                                      │     └── Padding
+                                      │           └── Column
+                                      │                 ├── _buildInfoRow (คณะ)
+                                      │                 ├── Divider
+                                      │                 ├── _buildInfoRow (วิชาที่ชอบ)
+                                      │                 ├── Divider
+                                      │                 ├── _buildInfoRow (เป้าหมาย)
+                                      │                 ├── Divider
+                                      │                 ├── _buildInfoRow (email)
+                                      │                 ├── Divider
+                                      │                 └── _buildInfoRow (phone)
+                                      │
+                                      ├── SizedBox
+                                      └── ทดลอง AI Chat
+                                            ├── Icon
+                                            └── ทดลอง AI Chat
 ```
+
+AiChatPage 
+  └── _AiChatPageState
+        └── Scaffold
+              ├── AppBar
+              │     └── Gemini AI Chat
+              │
+              └── body
+                    ├── Expanded
+                    │     └── [_messages.isEmpty]
+                    │           ├── true  Text ('👋 Hello Gemini')
+                    │           └── false --> ListView.builder
+                    │                           └── _buildMessage 
+                    │                                 └── Align
+                    │                                       └── Container
+                    │                                             └── Text 
+                    │
+                    ├── [if (_isLoading)] 
+                    │     └── true  Padding  CircularProgressIndicator
+                    │
+                    └── SafeArea 
+                          └── Padding
+                                └── Row
+                                      ├── Expanded
+                                      │     └── TextField
+                                      ├── SizedBox
+                                      └── FloatingActionButton.small
+                                            └── Icon
+```
+
 
 ### 3.3 การเปรียบเทียบ Hot Reload vs Hot Restart
 
