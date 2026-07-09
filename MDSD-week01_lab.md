@@ -1221,6 +1221,12 @@ class ProfilePage extends StatelessWidget {
 6. ลองกด **R** ใน Terminal เพื่อ Hot Restart
 
 > 🔍 **ข้อสังเกต:** Hot Reload vs Hot Restart ต่างกันอย่างไร? บันทึกการสังเกตลงในใบงาน
+```
+ Hot Reload: เปลี่ยนแปลงเฉพาะโค้ด UI / Logic โดยไม่รีเซ็ตสถานะแอป 
+ Hot Restart: เริ่มต้นแอปใหม่ทั้งหมด และเคลียร์สถานะแอปให้กลับไปนับหนึ่งใหม่
+```
+> 
+<img width="1288" height="975" alt="image" src="https://github.com/user-attachments/assets/1ac2c502-7ca3-49b3-a937-f6a4c222afe7" />
 
 ---
 
