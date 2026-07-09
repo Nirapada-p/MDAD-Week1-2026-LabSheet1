@@ -1881,38 +1881,303 @@ AiChatPage
 **Prompt แบบ Detailed:**
 ```
 คุณคือผู้เชี่ยวชาญด้านการตกแต่ง UI
-ช่วยปรับปรุงเฉพาะส่วน UI ในเมธอด build และเมธอด _buildMessage ของคลาส _AiChatPageState โดยเน้นความสวยงาม สบายตา และจัดระเบียบตามแนวทางนี้:
+หน้าที่ของคุณคือ Redesign เฉพาะ User Interface ของหน้าแชท Gemini AI ให้ดูทันสมัย ระดับ Production พร้อมใช้งานจริง คล้าย ChatGPT, Google Gemini หรือ Microsoft Copilot
+==================================================
+ข้อกำหนดสำคัญ
+==================================================
 
-1. ปรับปรุง _buildMessage (กล่องข้อความ):
-   - ข้อความของ User: เปลี่ยนจาก Colors.blue เป็นสีส้ม (Colors.orange) ให้ตรงกับธีมหลักของแอป ข้อความด้านในเป็นสีขาว
-   - ข้อความของ AI: ให้ใช้สีเทาอ่อนมาก (เช่น Colors.grey.shade100) ข้อความด้านในเป็นสีดำอ่อน (Colors.black87)
-   - ความโค้งมน (BorderRadius): ทำมุมให้โค้งมนแบบธรรมชาติกว้าง 16 หน่วย โดยที่ฝั่ง User ให้มุมล่างขวาแหลม (ขอบตรง) และฝั่ง AI ให้มุมล่างซ้ายแหลม เพื่อแยกฝั่งคนพูดให้ชัดเจนตามสไตล์แอปแชตสมัยใหม่
-   - กำหนดขนาดกล่องไม่ให้เกิน 75% ของความกว้างหน้าจอ และเพิ่มเงา (BoxShadow) จางๆ ด้านหลังบับเบิ้ล
+- ห้ามแก้ไข Logic ใด ๆ
+- ห้ามแก้ไข _sendMessage()
+- ห้ามแก้ไขตัวแปร
+- ห้ามแก้ไข API
+- ห้ามเปลี่ยนชื่อ Widget
 
-2. ปรับปรุงพื้นที่พิมพ์ข้อความ (TextField) และปุ่มส่งด้านล่าง:
-   - นำ SafeArea และ Padding ไปครอบ และยกเลิกเส้นขอบ (Border) แข็งๆ ของเดิมออก
-   - ตกแต่ง TextField ให้มีพื้นหลังสีเทาจาง (Filled: true) ทำมุมโค้งมนรอบด้าน 24 หน่วย เมื่อกดโฟกัสให้เปลี่ยนเส้นขอบจางๆ เป็นสีส้ม
-   - ปรับให้รองรับการพิมพ์ยาวๆ โดยให้ช่องพิมพ์ยืดขยายบรรทัดขึ้นด้านบนเองได้สวยงาม (maxLines: null)
-   - ปรับปุ่ม FloatingActionButton เป็นปุ่มวงกลมสีส้มเข้าชุดกัน โดยใช้ไอคอนส่ง (Icons.send_rounded) สีขาว
+ให้แก้ไขเฉพาะ
 
-3. ปรับปรุงพื้นหลังและสถานะดาวน์โหลด:
-   - ปรับสีพื้นหลังของ Scaffold ทั้งหน้าจอให้เป็นสีขาวนวลหรือเทาจาง (Colors.grey.shade50) เพื่อให้กล่องข้อความเด่นขึ้น
-   - เปลี่ยนสีตัวหมุนดาวน์โหลด (CircularProgressIndicator) ให้เป็นสีส้ม
-   - เพิ่มไอคอนรูปข้อความจางๆ (Icons.chat_bubble_outline) ไว้ตรงกลางหน้าจอในกรณีที่ข้อความแชตยังว่างอยู่ (_messages.isEmpty)
+- build()
+- _buildMessage()
 
-4. ข้อกำหนดสำคัญ: ห้ามแก้ไขระบบตรรกะหลังบ้าน (Logic), ตัวแปร _messages, ฟังก์ชัน _sendMessage() หรือการเรียกใช้งาน ApiConfig เด็ดขาด ให้แก้ไขและส่งกลับมาเฉพาะโค้ดโครงสร้างวิดเจ็ตในส่วนที่ระบุข้างต้นเท่านั้น
+==================================================
+DESIGN STYLE
+==================================================
+
+ออกแบบ UI ให้มีสไตล์
+
+- Modern
+- Minimal
+- Premium
+- Material Design 3
+- Soft UI
+- Clean
+- Comfortable
+- Luxury
+- Responsive
+
+Color Palette
+
+Primary
+- Colors.orange
+
+Secondary
+- Colors.deepOrangeAccent
+
+Background
+- Color(0xFFF8F9FB)
+
+Card
+- Colors.white
+
+AI Bubble
+- Color(0xFFF2F4F7)
+
+User Bubble
+- Colors.orange
+
+Primary Text
+- Colors.black87
+
+Secondary Text
+- Colors.grey
+
+==================================================
+APP BAR
+==================================================
+
+ออกแบบ AppBar ใหม่
+
+- ใช้ Material 3
+- elevation = 0
+- พื้นหลังสีขาว
+- Title อยู่กึ่งกลาง
+- Title เป็น "Gemini AI"
+- เพิ่ม Icons.auto_awesome สีส้ม
+- เพิ่ม Divider บาง ๆ ด้านล่าง AppBar
+
+==================================================
+CHAT AREA
+==================================================
+
+- พื้นหลังทั้งหน้าจอใช้ Color(0xFFF8F9FB)
+- ใช้ SafeArea
+- ใช้ AnimatedContainer
+- รองรับการแสดงผลเมื่อ Keyboard เปิด
+- Padding รอบหน้าจอ 16 px
+
+==================================================
+EMPTY STATE
+==================================================
+
+เมื่อ _messages.isEmpty
+
+แสดงอยู่กึ่งกลางหน้าจอ
+
+ประกอบด้วย
+
+- CircleAvatar ขนาดใหญ่ สีส้มอ่อน
+- Icon Icons.auto_awesome ขนาด 48
+- Text "Hello Gemini"
+  - Font Size 22
+  - FontWeight.bold
+- Text "Start a conversation with AI"
+  - สีเทา
+  - จัดให้อยู่ใต้ข้อความหลัก
+
+==================================================
+CHAT BUBBLE
+==================================================
+
+ออกแบบ Bubble ใหม่ทั้งหมด
+
+User Message
+
+- สีส้ม
+- ตัวอักษรสีขาว
+- BorderRadius.circular(22)
+- มุมล่างขวาเป็นมุมตรง
+- Shadow นุ่ม ๆ
+- Padding 14
+- Margin แนวตั้ง 8
+
+AI Message
+
+- สีขาว
+- Border สีเทาอ่อน
+- Shadow จาง ๆ
+- BorderRadius.circular(22)
+- มุมล่างซ้ายเป็นมุมตรง
+- ตัวอักษรสีดำ
+
+กำหนด Bubble
+
+- กว้างไม่เกิน 78% ของหน้าจอ
+- ใช้ ConstrainedBox
+
+==================================================
+MESSAGE ANIMATION
+==================================================
+
+ข้อความใหม่ทุกข้อความ
+
+ใช้ Animation
+
+- AnimatedSwitcher
+  หรือ
+- AnimatedContainer
+
+Effect
+
+- Fade In
+- Slide In
+
+Duration
+
+- 300 milliseconds
+
+==================================================
+INPUT AREA
+==================================================
+
+ออกแบบช่องพิมพ์ข้อความใหม่
+
+ลักษณะ
+
+- Floating Input Area
+- Container สีขาว
+- Shadow บาง ๆ
+- Padding 12
+
+ภายในประกอบด้วย Row
+
+TextField
+
+- Filled = true
+- fillColor = Color(0xFFF5F5F5)
+- ไม่มีเส้น Border แข็ง
+- BorderRadius 30
+- Hint สีเทา
+- minLines = 1
+- maxLines = null
+- TextInputAction.send
+
+เมื่อ Focus
+
+- Border สีส้ม
+
+==================================================
+SEND BUTTON
+==================================================
+
+เปลี่ยน FloatingActionButton เป็น
+
+- ปุ่มวงกลม
+- Gradient สี Orange → Deep Orange
+- Icons.send_rounded สีขาว
+- มี Shadow
+- รองรับ Ripple Effect
+
+==================================================
+LOADING
+==================================================
+
+ระหว่าง AI กำลังตอบ
+
+ไม่ใช้ CircularProgressIndicator เพียงอย่างเดียว
+
+ให้แสดง
+
+AI Bubble
+
+ภายในมี
+
+- CircularProgressIndicator สีส้ม
+  หรือ
+- Loading Animation แบบสามจุด (...)
+
+พร้อมข้อความ
+
+"Gemini is thinking..."
+
+==================================================
+LIST VIEW
+==================================================
+
+ListView
+
+- Padding 16
+- BouncingScrollPhysics
+- Scroll ลงล่างอัตโนมัติเมื่อมีข้อความใหม่
+
+==================================================
+TYPOGRAPHY
+==================================================
+
+User Message
+
+- FontWeight.w500
+
+AI Message
+
+- FontWeight.w400
+
+ทุกข้อความ
+
+- LetterSpacing = 0.2
+- Height = 1.5
+
+==================================================
+EXTRA
+==================================================
+
+เพิ่ม Animation และลูกเล่นเล็กน้อย
+
+- Bubble Fade In
+- Scale Animation ของปุ่มส่ง
+- Soft Shadow
+- Smooth Transition
+- Hero Feeling
+- Premium Interaction
+
+==================================================
+OUTPUT
+==================================================
+
+ส่งกลับมาเฉพาะ
+
+1. เมธอด build()
+
+2. เมธอด _buildMessage()
+
+เท่านั้น
+
+ห้ามส่งโค้ดส่วนอื่น
+
+ห้ามแก้ไข Logic
+
+ห้ามเพิ่ม Package ใหม่
+
+ห้ามเปลี่ยนชื่อคลาส
 ```
+<img width="1911" height="1001" alt="image" src="https://github.com/user-attachments/assets/8d1bb094-00d8-4c22-9fc8-7719ab329299" />
 
 **ความแตกต่างของผลลัพธ์:**
 ```
-(บันทึกสิ่งที่สังเกต)
+Simple Prompt
+-บอกความต้องการแบบกว้าง ๆ เช่น ให้ตกแต่ง UI ให้สวยขึ้น
+-AI มีอิสระในการออกแบบเอง
+-ผลลัพธ์อาจแตกต่างกันในแต่ละครั้ง เพราะ AI ตัดสินใจเองว่าจะใช้สี ฟอนต์ หรือ Layout แบบไหน
+-เหมาะกับงานที่ต้องการปรับแต่งเร็ว ๆ หรืออยากให้ AI คิดดีไซน์ให้
+
+Detailed Prompt
+-ระบุรายละเอียดทุกส่วน เช่น สี รูปแบบ Bubble, AppBar, Animation, ระยะห่าง, Typography และข้อจำกัดต่าง ๆ
+-AI จะสร้าง UI ได้ตรงตามความต้องการมากกว่า และมีความสม่ำเสมอ
+-ผลลัพธ์ดูเป็นมืออาชีพ คล้ายแอปจริง เพราะมีแนวทางการออกแบบชัดเจน
+-เหมาะกับงานที่ต้องการควบคุมหน้าตา UI ให้ตรงตามแบบที่วางไว้
 ```
 
 ### 3.5 Screenshot ของ AI Chat App
 
-```
-[แนบ Screenshot ของ Gemini AI Chat ที่ทำงานได้]
-```
+<img width="1912" height="958" alt="image" src="https://github.com/user-attachments/assets/b0d107c6-0f82-4788-b5d4-58d8527f40ac" />
+
 
 ---
 
